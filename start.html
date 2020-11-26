@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Javascript SDKs-->
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
+<script src="js/amazon-cognito-auth.min.js"></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.16.min.js"></script> 
+<script src="js/amazon-cognito-identity.min.js"></script>   
+<script src="js/config.js"></script>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>Start</title>
+<style>
+	body {
+    	background-color: #004E9B;
+	}
+</style>
+</head>
+
+<body>
+
+<div class="w3-display-container">
+	<img src="header.png" alt="header" class="w3-image" style="width:100%;min-height:100px;">
+</div>
+
+<div class="w3-container">
+<div class="w3-row">
+  <div class="w3-container w3-right">
+  	<a href="https://mygoal.de/"class="w3-button  w3-round-xxlarge" style="color:#004E9B;background-color:#FFF5B3">Über MyGoal Training</a>
+  	<a onclick="document.getElementById('id01').style.display='block'" class="w3-button  w3-round-xxlarge" style="color:#004E9B;background-color:#FFDF00">Login</a>
+  </div>
+</div>
+		
+<div class="w3-row-padding">
+	<div class="w3-display-container ">	
+	<form class="w3-transparent w3-margin-top w3-margin-bottom w3-display-topmiddle w3-border w3-border w3-round-xlarge" style="width:100%;max-width:900px;">
+		<div class="w3-full w3-section w3-margin">
+			<h6 class = "w3-text-white">Das erst mal hier? Dann leg schnell und unkompliziert dein Profil an:</h6>
+    		<label class = "w3-text-white">E-mail</label>
+			<input class="w3-input w3-border w3-round" type="text" required> 
+<!--		<input class="w3-input w3-border w3-round w3-text-white" style="background-color:#004E9B" type="text" required> -->
+
+  		</div>
+
+		<div class="w3-row-padding w3-mobile">
+  			<div class="w3-half">   
+    			<label class = "w3-text-white">Vorname</label>
+   				<input class="w3-input w3-border w3-round" type="text" required>
+<!--	<input class="w3-input w3-border w3-round w3-text-white" style="background-color:#004E9B" type="text" required>-->
+
+			</div>
+			<div class="w3-half">  
+				<label class = "w3-text-white">Nachname</label>
+    			<input class="w3-input w3-border w3-round" type="text"  required>
+<!--	<input class="w3-input w3-border w3-round w3-text-white" style="background-color:#004E9B" type="text"  required>-->
+
+			</div>
+		</div>
+<!--	W3 Modal for Login page-->
+		<div id="id01" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:600px;">
+		  <header class="w3-container"> 
+			<span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+			<h2></h2>
+		  </header>
+		  <div class="w3-container">
+			<label>E-mail</label>
+			<input class="w3-input w3-border w3-round w3-margin-bottom" type="text" required>
+			<label>Passwort</label>
+			<input class="w3-input w3-border w3-round" type="new-password"  required>
+			<p onclick="" class = "w3-right-align"> <u>Passwort vergessen</u></p> 
+			<div class="w3-row w3-center">
+				<a onclick="" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Login</a> 
+			</div>
+		  </div>
+		</div>
+		</div>
+<!--	W3 Modal for verification Code-->
+		<div id="id02" class="w3-modal w3-padding-48">
+		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:700px;">
+		   
+			<span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+			<h2></h2>
+		  
+		  <div class="w3-container w3-center">
+		  	<p class="w3-text-green"><i class="fa fa-check w3-green" aria-hidden="true"></i><span> </span>Registriert</p>
+			<p>Danke für deine Anmeldung!</p>
+			<p>Wir haben dir soeben 6-stelligen Verifizierungscode per E-mail zugeschickt.
+				(Prüfe deinen Spam-filter,falls du ihn im Posteingang nicht findest.)
+				Gib ihn bitte hier ein, um deine Registrierung abzuschließen:
+			</p>
+		  </div> 
+		  <div class="w3-container">
+			<input class="w3-input w3-border w3-round" type="number"  required>
+			<p onclick="" class = "w3-right-align"> <u>Neuen code zusenden</u></p> 
+			<div class="w3-row w3-center">
+				<a onclick="document.getElementById('id03').style.display='block'" class="w3-button w3-round-xlarge " style="color:#004E9B;background-color:#FFDF00">Weiter</a> 
+			</div>
+		  </div>
+		</div>
+		</div>
+<!--	W3 Modal for Registration completed-->
+		<div id="id03" class="w3-modal w3-padding-48">
+		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:700px;">
+			<span onclick="document.getElementById('id03').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+			<h2> </h2> 
+		  <div class="w3-container w3-center">
+		  	<p class="w3-text-green"><i class="fa fa-check w3-green" aria-hidden="true"></i><span> </span>Verifiziert</p>
+			<p>Na dann: Herzlich Willkommen!</p>
+			<p>Ab jetzt kannst du dich mit deiner E-mail Address und deinem Passwort jederzeit einloggen </p>
+		  </div> 
+		</div>
+		</div>
+<!--	W3 Modal for contact us form-->
+		<div id="id04" class="w3-modal w3-padding-16 ">
+		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:600px;">
+		  <header class="w3-container"> 
+			<span onclick="document.getElementById('id04').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+			<h6>Wie können wir dir helfen?</h6>
+		  </header>
+		  <div class="w3-container">
+<!--			<div class="w3-row-padding w3-mobile">-->
+  			<div class="w3-half">   
+    			<label>Vorname</label>
+   				<input class="w3-input w3-border w3-round" style="width:98%" type="text" required>
+			</div>
+			<div class="w3-half">  
+				<label>Nachname</label>
+    			<input class="w3-input w3-border w3-round" style="width:99%" type="text"  required>
+			</div>
+<!--			</div>-->
+			<label>E-mail</label>
+			<input class="w3-input w3-border w3-round w3-margin-bottom" type="text" required>
+			<label>Nachricht</label>
+			<textarea class="w3-input w3-border w3-round" style="width:100%" name="Text1" rows="5"></textarea>
+			<div class="w3-row w3-center">
+				<a onclick="document.getElementById('id05').style.display='block'" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Senden</a> 
+			</div>
+		  </div>
+		</div>
+		</div>
+<!--	W3 Modal for contact_us form completion-->
+		<div id="id05" class="w3-modal w3-padding-48">
+		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:700px;">
+			<span onclick="document.getElementById('id05').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+			<h2> </h2> 
+		  <div class="w3-container w3-center">
+		  	<p class="w3-text-green"><i class="fa fa-check w3-green" aria-hidden="true"></i><span> </span>Versendet</p>
+			<p>Danke für deine Nachricht!</p>
+			<p>Wir melden uns innerhalb der nächsten 48h bei dir.</p>
+		  </div> 
+		</div>
+		</div>
+<!--		W3 modals end-->
+		<div class="w3-row-padding w3-margin-top w3-mobile">
+			<div class="w3-half">  
+				<label class = "w3-text-white">Passwort</label>
+    			<input class="w3-input w3-border w3-round" type="new-password"  required>
+<!--			<input class="w3-input w3-border w3-round w3-text-white" style="background-color:#004E9B" type="new-password"  required>-->
+			</div>
+			<div class="w3-half">  
+				<label class = "w3-text-white">Passwort wiederholen</label>
+   				<input class="w3-input w3-border w3-round" type="new-password"  required>
+<!--			<input class="w3-input w3-border w3-round w3-text-white" style="background-color:#004E9B" type="new-password"  required>-->
+			</div>
+		</div>
+		<br>
+		<div class="w3-row-padding w3-center w3-margin-top w3-mobile">
+			<a onclick="document.getElementById('id02').style.display='block'" class="w3-button w3-round-xxlarge" style="color:#004E9B;background-color:#FFDF00">Profil anlagen</a>
+		</div>
+		
+		<div class="w3-row-padding w3-center w3-margin-top w3-mobile">
+			<h6 class = "w3-text-white">Du möchest erstmal loswerden, ohne dich zu registrieren? <a onclick="document.getElementById('id04').style.display='block'" class="w3-button w3-round-xxlarge" style="color:#004E9B;background-color:#FFDF00">Schreib uns</a></h6>
+		</div>
+		
+		
+	</form>
+	</div>
+</div>
+</div>
+</body>
+</html>
