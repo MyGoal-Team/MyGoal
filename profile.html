@@ -20,14 +20,215 @@
 	<img src="profile.png" alt="header" class="w3-image" style="width:100%;min-height:100px;">
 </div>
 
-<div class="w3-bar w3-border" style="background-color:#004E9B">
-  <a href="#" class="w3-bar-item w3-button w3-text-white">Home</a>
-  <a href="#" class="w3-bar-item w3-button w3-text-white">profile</a>
-  <a href="#" class="w3-bar-item w3-button w3-text-white">Trainingsplan</a>
-  <a href="#" class="w3-bar-item w3-button w3-text-white">Trainerchat</a>
-  <a href="#" class="w3-bar-item w3-button w3-text-white">Bewerbungsanalyse</a>
-  <a href="#" class="w3-bar-item w3-button w3-text-white w3-right">Logout</a>
+<div class="w3-bar w3-border" style="background-color:#004E9B;">
+	<div class="w3-content" style="max-width:1500px;;">
+	  <a href="#" class="w3-bar-item w3-button w3-text-white">Home</a>
+	  <a href="#" class="w3-bar-item w3-button w3-text-white">profile</a>
+	  <a href="#" class="w3-bar-item w3-button w3-text-white">Trainingsplan</a>
+	  <a href="#" class="w3-bar-item w3-button w3-text-white">Trainerchat</a>
+	  <a href="#" class="w3-bar-item w3-button w3-text-white">Bewegungsanalyse</a>
+	  <a href="#" class="w3-bar-item w3-button w3-text-white w3-right">Logout</a>
+	</div>
 </div>
 
+<div class="w3-content w3-margin-top" style="max-width:1500px;">
+<!-- The Grid -->
+  <div class="w3-row-padding">
+<!-- Left Column -->
+    <div class="w3-quarter">
+    
+      <div class="w3-white w3-card-4">
+        <div class="w3-display-container">
+          <img src="potrait.jpg" style="width:100%" alt="Avatar">
+        </div>
+		<hr>
+        <div class="w3-container">
+		  <p><i class="fa fa-user icon fa-fw w3-margin-right w3-large w3-text-black"></i>Shubham Pachade</p>
+          <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-large w3-text-black" aria-hidden="true"></i>14.05.1995</p>
+          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-black"></i>shubham@mygoal.de</p>
+          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-black"></i>017673244935</p>
+          <hr>
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
+    </div>
+<!-- Center Column -->
+	<div class="w3-half">
+		<div class="w3-white w3-card-4">
+			<div class="w3-container">
+				<h4 style="color:#004E9B;">Meine Aktivitäten</h4>
+				<div class="w3-quarter w3-middle">
+					<img src="run.png" style="width:35%" alt="Avatar">
+					<p>Running</p>
+				</div>
+				<div class="w3-quarter w3-middle">
+					<img src="bike.png" style="width:35%" alt="Avatar">
+					<p>Biking</p>
+				</div>
+				<div class="w3-quarter w3-middle">
+					<img src="swim.png" style="width:35%" alt="Avatar">
+					<p>Swimming</p>
+				</div>
+				<div class="w3-quarter w3-middle">
+					<img src="yoga.png" style="width:35%" alt="Avatar">
+					<p>Yoga</p>
+				</div>
+			</div>
+			<div class="w3-container">
+				<p>
+					<label>Andere Sportart <span> : </span></label>
+					<label id=""></label>
+				</p>
+				<p><i onclick="document.getElementById('id01').style.display='block'" class="fa fa-edit w3-xlarge w3-right w3-button" style="color:#004E9B;" ></i></p>
+			</div>
+		</div>
+		
+<!--		<div class="w3-half">-->
+		<div class="w3-white w3-card-4 w3-margin-top">
+			<div class="w3-container">
+				<h4 style="color:#004E9B;">Training Informationen</h4>
+				<p>
+					<label>Training studen pro woche <span> : </span></label>
+					<label id=""></label>
+				</p>
+			</div>
+			<div class="w3-responsive ">
+<!--  				<table class="w3-table w3-border" style="background-color:#004E9B;">-->
+					<div class="w3-container ">
+					<table class="w3-table w3-striped w3-border">
+    				<tr>
+					  <td>MO</td>
+					  <td><label id=""></label></td>
+					  <td>Laufen</td>
+					</tr>
+					<tr>
+					  <td>DI</td>
+					  <td>Schwimmen</td>
+					  <td><label id=""></label></td>
+					</tr>
+					<tr>
+					  <td>MI</td>
+					  <td><label id=""></label></td>
+				      <td><label id=""></label></td>
+					</tr>
+					<tr>
+					  <td>DO</td>
+					  <td><label id=""></label></td>
+					  <td>Radfahren</td>
+					</tr>
+					<tr>
+					  <td>FR</td>
+					  <td><label id=""></label></td>
+					  <td><label id=""></label></td>
+					</tr>
+					<tr>
+					  <td>SA</td>
+					  <td><label id=""></label></td>
+					  <td><label id=""></label></td>
+					</tr>
+					<tr>
+					  <td>SO</td>
+					  <td>Laufen</td>
+					  <td><label id=""></label></td>
+					</tr>
+  				</table>
+				<p><i onclick="document.getElementById('id02').style.display='block'" class="fa fa-edit w3-xlarge w3-right w3-button" style="color:#004E9B;" ></i></p>
+				</div>
+			</div>
+		</div>
+<!--		</div>-->
+<!--	W3 Modal for My Activities-->
+		<div id="id01" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:600px;">
+		  <header class="w3-container"> 
+			<span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+			<h2></h2>
+		  </header>
+		  <div class="w3-container">
+			<label>E-mail</label>
+			<input class="w3-input w3-border w3-round w3-margin-bottom" type="text" required>
+			<label>Passwort</label>
+			<input class="w3-input w3-border w3-round" type="new-password"  required>
+			<p onclick="" class = "w3-right-align"> <u>Passwort vergessen</u></p> 
+			<div class="w3-row w3-center">
+				<a onclick="" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Login</a> 
+			</div>
+		  </div>
+		</div>
+		</div>
+		
+<!--	W3 Modal for Training Information-->
+		<div id="id02" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:600px;">
+		  <header class="w3-container"> 
+			<span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+			<h2></h2>
+		  </header>
+		  <div class="w3-container">
+			<label>E-mail</label>
+			<input class="w3-input w3-border w3-round w3-margin-bottom" type="text" required>
+			<label>Passwort</label>
+			<input class="w3-input w3-border w3-round" type="new-password"  required>
+			<p onclick="" class = "w3-right-align"> <u>Passwort vergessen</u></p> 
+			<div class="w3-row w3-center">
+				<a onclick="" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Login</a> 
+			</div>
+		  </div>
+		</div>
+		</div>
+		
+<!--	W3 Modal for Gesundheit-->
+		<div id="id03" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:600px;">
+		  <header class="w3-container"> 
+			<span onclick="document.getElementById('id03').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+			<h2></h2>
+		  </header>
+		  <div class="w3-container">
+			<label>E-mail</label>
+			<input class="w3-input w3-border w3-round w3-margin-bottom" type="text" required>
+			<label>Passwort</label>
+			<input class="w3-input w3-border w3-round" type="new-password"  required>
+			<p onclick="" class = "w3-right-align"> <u>Passwort vergessen</u></p> 
+			<div class="w3-row w3-center">
+				<a onclick="" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Login</a> 
+			</div>
+		  </div>
+		</div>
+		</div>
+	</div>
+<!-- Right Column -->
+	<div class="w3-quarter">
+		<div class="w3-white w3-card-4">
+			<div class="w3-container">
+				<h4 style="color:#004E9B;">Gesundheit</h4>
+				<p>
+  				   <input class="w3-check" type="checkbox">
+  				   <label>Raucher</label>
+  				</p>
+				<p>
+					<label>körpergröße <span> : </span></label>
+					<label id=""></label>
+				</p>
+				<p>
+					<label>Gewicht <span> : </span></label>
+					<label id=""></label>
+				</p>
+				<p>
+					<label>Beruf <span> : </span></label>
+					<label id=""></label>
+				</p>
+				<p>
+					<label>Krankheiten, Medikament <span> : </span></label>
+					<label id=""></label>
+				</p>
+				<p><i onclick="document.getElementById('id03').style.display='block'" class="fa fa-edit w3-xlarge w3-right w3-button" style="color:#004E9B;" ></i></p>
+			</div>
+		</div>	
+	</div>
+</div>
+</div>
+	
 </body>
 </html>
