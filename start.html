@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
 <!-- Javascript SDKs-->
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
 <script src="js/amazon-cognito-auth.min.js"></script>
@@ -10,14 +13,176 @@
 <script src="js/amazon-cognito-identity.min.js"></script>   
 <script src="js/config.js"></script>
 
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>Start</title>
 <style>
 	body {
     	background-color: #004E9B;
 	}
 </style>
+<script>
+ function signInButton() {
+	var authenticationData = {
+        Username : document.getElementById("inputUsername").value,
+        Password : document.getElementById("inputPassword").value,
+    };
+    var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+	var poolData = {
+        UserPoolId : _config.cognito.userPoolId, // Your user pool id here
+        ClientId : _config.cognito.clientId, // Your client id here
+    };
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+    var userData = {
+        Username : document.getElementById("inputUsername").value,
+        Pool : userPool,
+    };
+    var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+	cognitoUser.authenticateUser(authenticationDetails, {
+        onSuccess: function (result) {
+			var accessToken = result.getAccessToken().getJwtToken();
+			console.log(accessToken);	
+			window.open("/Users/shubhampachade/Documents/Website/Forgot Password_v1.6/profile.html");
+        },
+        onFailure: function(err) {
+            alert(err.message || JSON.stringify(err));
+        },
+    });
+  }
+  function forgotpasswordbutton(){
+	var poolData = {
+        UserPoolId : _config.cognito.userPoolId, // Your user pool id here
+        ClientId : _config.cognito.clientId, // Your client id here
+    };
+	
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+	var modal = document.getElementById("id02");
+	modal.style.display = "none";
+	var modal1 = document.getElementById("id03");
+    var userData = {
+        Username : document.getElementById("email").value,
+        Pool : userPool,
+    };
+	
+    var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+		
+    cognitoUser.forgotPassword({
+        onSuccess: function (result) {
+            console.log('call result: ' + result);
+			modal1.style.display = "block";
+        },
+        onFailure: function(err) {
+            alert(err);
+			console.log(err);
+        },
+        });
+  }
+	function inputVerificationCode() {
+	var poolData = {
+        UserPoolId : _config.cognito.userPoolId, // Your user pool id here
+        ClientId : _config.cognito.clientId, // Your client id here
+    };
+	
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+	
+    var userData = {
+        Username : document.getElementById("email").value,
+        Pool : userPool,
+    };
+	
+    var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+    var verificationCode = document.getElementById("code").value;
+    var newPassword = document.getElementById("newpassword").value
+    cognitoUser.confirmPassword(verificationCode, newPassword, this);
+    }
+	
+	function registerButton() {
+		var modal = document.getElementById("id02");
+		givenname =  document.getElementById("givennameRegister").value;
+		familyname =  document.getElementById("familynameRegister").value;
+		username = document.getElementById("emailInputRegister").value;
+		
+		if (document.getElementById("passwordInputRegister").value != document.getElementById("confirmationpassword").value) {
+			alert("Passwords Do Not Match!")
+			throw "Passwords Do Not Match!"
+		} else {
+			password =  document.getElementById("passwordInputRegister").value;	
+		}
+		
+		poolData = {
+				UserPoolId : _config.cognito.userPoolId, // Your user pool id here
+				ClientId : _config.cognito.clientId // Your client id here
+			};		
+		var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+
+		var attributeList = [];
+		
+		var dataEmail = {
+			Name : 'email', 
+			Value : username, //get from form field
+		};
+		
+		var dataGivenName = {
+			Name : 'given_name', 
+			Value : givenname, //get from form field
+		};
+		var dataFamilyName = {
+			Name : 'family_name', 
+			Value : familyname, //get from form field
+		};
+		var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
+		var attributeGivenName = new AmazonCognitoIdentity.CognitoUserAttribute(dataGivenName);
+		var attributeFamilyName = new AmazonCognitoIdentity.CognitoUserAttribute(dataFamilyName);
+		
+		
+		attributeList.push(attributeEmail);
+		attributeList.push(attributeGivenName);
+		attributeList.push(attributeFamilyName);
+
+		userPool.signUp(username, password, attributeList, null, function(err, result){
+			if (err) {
+				alert(err.message || JSON.stringify(err));
+				return;
+			}
+			cognitoUser = result.user;
+			console.log('user name is ' + cognitoUser.getUsername());
+			//change elements of page
+			document.getElementById("titleheader").innerHTML = "Check your email for a verification link";
+			modal.style.display = "block";
+		});
+	  }
+		
+		
+	function verify(){
+	var modal = document.getElementById("id03");
+	var poolData = {
+    	UserPoolId : _config.cognito.userPoolId, // Your user pool id here
+    	ClientId : _config.cognito.clientId, // Your client id here
+    };
+	
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+	
+    var userData = {
+        Username : document.getElementById("emailInputRegister").value,
+        Pool : userPool,
+    };
+	
+    var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+	var code = document.getElementById("OTP").value;
+	cognitoUser.confirmRegistration(code, true, function(err, result) {
+    if (err) {
+        console.log(err);
+        return;
+    }
+
+    console.log('call result: ' + result);
+	if (result == 'SUCCESS') {
+        window.open("/Users/shubhampachade/Documents/Website/Forgot Password_v1.6/login.html");
+		modal.style.display = "block";
+        return;
+    }	
+		
+});
+}
+</script>	
 </head>
 
 <body>
@@ -40,7 +205,7 @@
 		<div class="w3-full w3-section w3-margin">
 			<h6 class = "w3-text-white">Das erst mal hier? Dann leg schnell und unkompliziert dein Profil an:</h6>
     		<label class = "w3-text-white">E-mail</label>
-			<input class="w3-input w3-border w3-round" type="text" required> 
+			<input class="w3-input w3-border w3-round" type="text" id="emailInputRegister" pattern=".*" required> 
 <!--		<input class="w3-input w3-border w3-round w3-text-white" style="background-color:#004E9B" type="text" required> -->
 
   		</div>
@@ -48,13 +213,13 @@
 		<div class="w3-row-padding w3-mobile">
   			<div class="w3-half">   
     			<label class = "w3-text-white">Vorname</label>
-   				<input class="w3-input w3-border w3-round" type="text" required>
+   				<input class="w3-input w3-border w3-round" type="text" id="givennameRegister" pattern=".*" required>
 <!--	<input class="w3-input w3-border w3-round w3-text-white" style="background-color:#004E9B" type="text" required>-->
 
 			</div>
 			<div class="w3-half">  
 				<label class = "w3-text-white">Nachname</label>
-    			<input class="w3-input w3-border w3-round" type="text"  required>
+    			<input class="w3-input w3-border w3-round" type="text" id="familynameRegister" pattern=".*" required>
 <!--	<input class="w3-input w3-border w3-round w3-text-white" style="background-color:#004E9B" type="text"  required>-->
 
 			</div>
@@ -68,12 +233,12 @@
 		  </header>
 		  <div class="w3-container">
 			<label>E-mail</label>
-			<input class="w3-input w3-border w3-round w3-margin-bottom" type="text" required>
+			<input class="w3-input w3-border w3-round w3-margin-bottom" type="text" id="inputUsername" name="username" required autofocus>
 			<label>Passwort</label>
-			<input class="w3-input w3-border w3-round" type="new-password"  required>
+			<input class="w3-input w3-border w3-round" type="password" id="inputPassword" name="password" required>
 			<p onclick="" class = "w3-right-align"> <u>Passwort vergessen</u></p> 
 			<div class="w3-row w3-center">
-				<a onclick="" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Login</a> 
+				<a onclick="signInButton()" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Login</a> 
 			</div>
 		  </div>
 		</div>
@@ -94,10 +259,10 @@
 			</p>
 		  </div> 
 		  <div class="w3-container">
-			<input class="w3-input w3-border w3-round" type="number"  required>
+			<input class="w3-input w3-border w3-round" type="number" id="OTP" pattern=".*" required>
 			<p onclick="" class = "w3-right-align"> <u>Neuen code zusenden</u></p> 
 			<div class="w3-row w3-center">
-				<a onclick="document.getElementById('id03').style.display='block'" class="w3-button w3-round-xlarge " style="color:#004E9B;background-color:#FFDF00">Weiter</a> 
+				<a onclick="verify()" class="w3-button w3-round-xlarge " style="color:#004E9B;background-color:#FFDF00">Weiter</a> 
 			</div>
 		  </div>
 		</div>
@@ -155,21 +320,22 @@
 		</div>
 		</div>
 <!--		W3 modals end-->
+		
 		<div class="w3-row-padding w3-margin-top w3-mobile">
 			<div class="w3-half">  
 				<label class = "w3-text-white">Passwort</label>
-    			<input class="w3-input w3-border w3-round" type="new-password"  required>
+    			<input class="w3-input w3-border w3-round" type="password" id="passwordInputRegister" pattern=".*" required>
 <!--			<input class="w3-input w3-border w3-round w3-text-white" style="background-color:#004E9B" type="new-password"  required>-->
 			</div>
 			<div class="w3-half">  
 				<label class = "w3-text-white">Passwort wiederholen</label>
-   				<input class="w3-input w3-border w3-round" type="new-password"  required>
+   				<input class="w3-input w3-border w3-round" type="password" id="confirmationpassword" pattern=".*"  required>
 <!--			<input class="w3-input w3-border w3-round w3-text-white" style="background-color:#004E9B" type="new-password"  required>-->
 			</div>
 		</div>
 		<br>
 		<div class="w3-row-padding w3-center w3-margin-top w3-mobile">
-			<a onclick="document.getElementById('id02').style.display='block'" class="w3-button w3-round-xxlarge" style="color:#004E9B;background-color:#FFDF00">Profil anlagen</a>
+			<a onclick="registerButton()" class="w3-button w3-round-xxlarge" style="color:#004E9B;background-color:#FFDF00">Profil anlagen</a>
 		</div>
 		
 		<div class="w3-row-padding w3-center w3-margin-top w3-mobile">
