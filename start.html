@@ -39,29 +39,28 @@
 	cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function (result) {
 			var accessToken = result.getAccessToken().getJwtToken();
-			console.log(accessToken);	
-			window.open("/Users/shubhampachade/Documents/Website/Forgot Password_v1.6/profile.html");
+			console.log(accessToken);
+			loadPage();
+//			window.open("/Users/shubhampachade/Documents/Website/Forgot Password_v1.6/profile.html");
         },
         onFailure: function(err) {
             alert(err.message || JSON.stringify(err));
         },
     });
   }
-  function forgotpasswordbutton(){
+ function forgotpasswordbutton(){
 	var poolData = {
         UserPoolId : _config.cognito.userPoolId, // Your user pool id here
         ClientId : _config.cognito.clientId, // Your client id here
     };
-	
     var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-	var modal = document.getElementById("id02");
+	var modal = document.getElementById("id06");
 	modal.style.display = "none";
-	var modal1 = document.getElementById("id03");
+	var modal1 = document.getElementById("id07");
     var userData = {
         Username : document.getElementById("email").value,
         Pool : userPool,
     };
-	
     var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
 		
     cognitoUser.forgotPassword({
@@ -75,7 +74,7 @@
         },
         });
   }
-	function inputVerificationCode() {
+ function inputVerificationCode() {
 	var poolData = {
         UserPoolId : _config.cognito.userPoolId, // Your user pool id here
         ClientId : _config.cognito.clientId, // Your client id here
@@ -93,8 +92,7 @@
     var newPassword = document.getElementById("newpassword").value
     cognitoUser.confirmPassword(verificationCode, newPassword, this);
     }
-	
-	function registerButton() {
+ function registerButton() {
 		var modal = document.getElementById("id02");
 		givenname =  document.getElementById("givennameRegister").value;
 		familyname =  document.getElementById("familynameRegister").value;
@@ -149,9 +147,7 @@
 			modal.style.display = "block";
 		});
 	  }
-		
-		
-	function verify(){
+ function verify(){
 	var modal = document.getElementById("id03");
 	var poolData = {
     	UserPoolId : _config.cognito.userPoolId, // Your user pool id here
@@ -182,6 +178,9 @@
 		
 });
 }
+ function loadPage(){
+     window.location="profile.html";
+	}
 </script>	
 </head>
 
@@ -236,14 +235,57 @@
 			<input class="w3-input w3-border w3-round w3-margin-bottom" type="text" id="inputUsername" name="username" required autofocus>
 			<label>Passwort</label>
 			<input class="w3-input w3-border w3-round" type="password" id="inputPassword" name="password" required>
-			<p onclick="" class = "w3-right-align"> <u>Passwort vergessen</u></p> 
+			<p onclick="document.getElementById('id06').style.display='block',document.getElementById('id01').style.display='none'" class = "w3-right w3-button"> <u>Passwort vergessen</u></p> 
 			<div class="w3-row w3-center">
 				<a onclick="signInButton()" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Login</a> 
 			</div>
 		  </div>
 		</div>
 		</div>
-<!--	W3 Modal for verification Code-->
+<!--	W3 Modal for Password vergessen-->
+		<div id="id06" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:600px;">
+		  <header class="w3-container"> 
+			<br>
+			<span onclick="document.getElementById('id06').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+			  <h2></h2>
+		  </header>
+		  <div class="w3-container">
+			<label>E-mail</label>
+			<input class="w3-input w3-border w3-round w3-margin-bottom" type="text" id="email" name="username" required autofocus>
+			<div class="w3-row w3-center">
+				<a onclick="forgotpasswordbutton()" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Receive Verification Code</a> 
+			</div>
+		  </div>
+		</div>
+		</div>
+<!--	W3 Modal for verification Code for forget password -->
+		<div id="id07" class="w3-modal w3-padding-48">
+		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:700px;">
+		   
+			<span onclick="document.getElementById('id07').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+			<h2></h2>
+		  
+		  <div class="w3-container w3-center">
+		  	<p class="w3-text-green"><i class="fa fa-check w3-green" aria-hidden="true"></i><span> </span>Registriert</p>
+			<p>Danke für deine Anmeldung!</p>
+			<p>Wir haben dir soeben 6-stelligen Verifizierungscode per E-mail zugeschickt.
+				(Prüfe deinen Spam-filter,falls du ihn im Posteingang nicht findest.)
+				Gib ihn bitte hier ein, um deine Registrierung abzuschließen:
+			</p>
+		  </div> 
+		  <div class="w3-container">
+			<input class="w3-input w3-border w3-round" type="text" id="code" pattern=".*" required>
+			<label>Neue Passwort</label>
+			<input class="w3-input w3-border w3-round" type="password" id="newpassword"  placeholder="Password"  >
+			<p onclick="" class = "w3-right-align"> <u>Neuen code zusenden</u></p> 
+			<div class="w3-row w3-center">
+				<a onclick="inputVerificationCode()" class="w3-button w3-round-xlarge " style="color:#004E9B;background-color:#FFDF00">Change Password</a> 
+			</div>
+		  </div>
+		</div>
+		</div>
+<!--	W3 Modal for verification Code for sign up-->
 		<div id="id02" class="w3-modal w3-padding-48">
 		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:700px;">
 		   
