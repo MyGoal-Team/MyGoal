@@ -4,14 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Javascript SDKs-->
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
-<script src="../../js/amazon-cognito-auth.min.js"></script>
-<script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.16.min.js"></script> 
-<script src="../../js/amazon-cognito-identity.min.js"></script>   
-<script src="../../js/config.js"></script>
-
+ <!--Cognito JavaScript-->
+<script src="js/amazon-cognito-identity.min.js"></script>  
+<script src="js/config.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.769.0.min.js"></script>
+	
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" rel="stylesheet" />
 <title>Profile</title>
 </head>
 
@@ -27,7 +28,7 @@
 	  <a href="#" class="w3-bar-item w3-button w3-text-white">Trainingsplan</a>
 	  <a href="#" class="w3-bar-item w3-button w3-text-white">Trainerchat</a>
 	  <a href="#" class="w3-bar-item w3-button w3-text-white">Bewegungsanalyse</a>
-	  <a href="#" class="w3-bar-item w3-button w3-text-white w3-right">Logout</a>
+	  <a onclick="signOut()" class="w3-bar-item w3-button w3-text-white w3-right">Logout</a>
 	</div>
 </div>
 
@@ -36,23 +37,29 @@
   <div class="w3-row-padding">
 <!-- Left Column -->
     <div class="w3-quarter">
-    
       <div class="w3-white w3-card-4">
-        <div class="w3-display-container">
-          <img src="potrait.jpg" style="width:100%" alt="Avatar">
+        <div class="w3-display-container w3-center">
+          <text class="w3-center w3-mobile w3-responsive "><img id="pic" class="w3-circle w3-margin-top w3-border w3-hover-opacity main-profile-img" style="height:200px;width:200px;" alt="Avatar"></text>
+		  <div onclick="document.getElementById('id04').style.display='block'" class="w3-display-bottommiddle w3-large w3-white w3-btn"><i class="fa fa-camera" aria-hidden="true"></i>  Edit</div>
         </div>
 		<hr>
         <div class="w3-container">
-		  <p><i class="fa fa-user icon fa-fw w3-margin-right w3-large w3-text-black"></i>Shubham Pachade</p>
-          <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-large w3-text-black" aria-hidden="true"></i>14.05.1995</p>
-          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-black"></i>shubham@mygoal.de</p>
-          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-black"></i>017673244935</p>
-          <hr>
+		  <p><i class="fa fa-user icon fa-fw w3-margin-right w3-large w3-text-black"></i><label id="fname1"></label> <label id="lname1"></label></p>
+          <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-large w3-text-black" aria-hidden="true"></i><label id="dob1"></label></p>
+		  <p><i onclick="document.getElementById('id05').style.display='block'" class="fa fa-edit w3-xlarge w3-right w3-button" style="color:#004E9B;" ></i></p>
         </div>
-      </div><br>
-
-    <!-- End Left Column -->
+      </div>
+		<div class="w3-white w3-card-4 w3-margin-top w3-margin-bottom">
+		  <div class="w3-container">
+				<h4 style="color:#004E9B;">Bio</h4>
+		  </div>
+		  <div class="w3-container">
+			  <p><label id="bio1"></label></p>
+			  <p><i onclick="document.getElementById('id07').style.display='block'" class="fa fa-edit w3-xlarge w3-right w3-button" style="color:#004E9B;" ></i></p>
+		  </div>  
+	 	</div>
     </div>
+<!-- End Left Column -->
 <!-- Center Column -->
 	<div class="w3-half">
 		<div class="w3-white w3-card-4">
@@ -85,12 +92,12 @@
 		</div>
 		
 <!--		<div class="w3-half">-->
-		<div class="w3-white w3-card-4 w3-margin-top">
+		<div class="w3-white w3-card-4 w3-margin-top w3-margin-bottom">
 			<div class="w3-container">
 				<h4 style="color:#004E9B;">Training Informationen</h4>
 				<p>
 					<label>Training studen pro woche <span> : </span></label>
-					<label id=""></label>
+					<label id="prowoche1"></label>
 				</p>
 			</div>
 			<div class="w3-responsive ">
@@ -99,38 +106,38 @@
 					<table class="w3-table w3-striped w3-border">
     				<tr>
 					  <td>MO</td>
-					  <td><label id=""></label></td>
-					  <td>Laufen</td>
+					  <td><label id="activity1_1"></label></td>
+					  <td><label id="activity2_1"></label></td>
 					</tr>
 					<tr>
 					  <td>DI</td>
-					  <td>Schwimmen</td>
-					  <td><label id=""></label></td>
+					  <td><label id="activity3_1"></label></td>
+					  <td><label id="activity4_1"></label></td>
 					</tr>
 					<tr>
 					  <td>MI</td>
-					  <td><label id=""></label></td>
-				      <td><label id=""></label></td>
+					  <td><label id="activity5_1"></label></td>
+					  <td><label id="activity6_1"></label></td>
 					</tr>
 					<tr>
 					  <td>DO</td>
-					  <td><label id=""></label></td>
-					  <td>Radfahren</td>
+					  <td><label id="activity7_1"></label></td>
+					  <td><label id="activity8_1"></label></td>
 					</tr>
 					<tr>
 					  <td>FR</td>
-					  <td><label id=""></label></td>
-					  <td><label id=""></label></td>
+					  <td><label id="activity9_1"></label></td>
+					  <td><label id="activity10_1"></label></td>
 					</tr>
 					<tr>
 					  <td>SA</td>
-					  <td><label id=""></label></td>
-					  <td><label id=""></label></td>
+					  <td><label id="activity11_1"></label></td>
+					  <td><label id="activity12_1"></label></td>
 					</tr>
 					<tr>
 					  <td>SO</td>
-					  <td>Laufen</td>
-					  <td><label id=""></label></td>
+					  <td><label id="activity13_1"></label></td>
+					  <td><label id="activity14_1"></label></td>
 					</tr>
   				</table>
 				<p><i onclick="document.getElementById('id02').style.display='block'" class="fa fa-edit w3-xlarge w3-right w3-button" style="color:#004E9B;" ></i></p>
@@ -138,7 +145,7 @@
 			</div>
 		</div>
 <!--		</div>-->
-<!--	W3 Modal for My Activities-->
+<!--W3 Modal for My Activities-->
 		<div id="id01" class="w3-modal">
 		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:600px;">
 		  <header class="w3-container"> 
@@ -158,21 +165,32 @@
 		</div>
 		</div>
 		
-<!--	W3 Modal for Training Information-->
+<!--W3 Modal for Training Information-->
 		<div id="id02" class="w3-modal">
 		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:500px;">
 		  <header class="w3-container"> 
 			<span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-			<h2></h2>
+			<h2>Training Informationen</h2>
 		  </header>
 		  <div class="w3-container">
+			<div class="w3-row">
+				<div class="w3-half w3-padding">
+					<label>Stunden pro Woche : </label>
+				</div>
+				<div class="w3-quarter">
+					<input class="w3-input" type="text" id="prowoche" >
+				</div>
+			</div>  
+			<hr>
+			<h4>Activities</h4>
 			<div class="w3-row w3-mobile">
-				<div class="w3-col m2">
-					<input class="w3-check" type="checkbox">
+				<div class="w3-col m2 w3-padding">
+<!--					<input class="w3-check" type="checkbox">-->
   		   	    	<label>MO</label>
 				</div>
 				<div class="w3-col m3 w3-padding">
 					  <select name="activity1" id="activity1">
+						<option></option>
 						<option value="egal">Egal</option>
 						<option value="schwimmen">Schwimmen</option>
 						<option value="radfahren">Radfahren</option>
@@ -180,8 +198,9 @@
 						<option value="athletik">Athletik</option>
 					  </select>
 				</div>
-				<div class="w3-col m3 w3-padding">
+				<div class="w3-col m3 w3-padding w3-margin-left">
 					  <select name="activity2" id="activity2">
+						<option></option>
 						<option value="egal">Egal</option>
 						<option value="schwimmen">Schwimmen</option>
 						<option value="radfahren">Radfahren</option>
@@ -191,12 +210,13 @@
 				</div>
 			</div>
 			<div class="w3-row">
-				<div class="w3-col m2 ">
-					<input class="w3-check" type="checkbox">
+				<div class="w3-col m2 w3-padding">
+<!--					<input class="w3-check" type="checkbox">-->
   		   	    	<label>DI</label>
 				</div>
 				<div class="w3-col m3 w3-padding">
 					  <select name="activity3" id="activity3">
+						<option></option>
 						<option value="egal">Egal</option>
 						<option value="schwimmen">Schwimmen</option>
 						<option value="radfahren">Radfahren</option>
@@ -204,8 +224,9 @@
 						<option value="athletik">Athletik</option>
 					  </select>
 				</div>
-				<div class="w3-col m3 w3-padding">
+				<div class="w3-col m3 w3-padding w3-margin-left">
 					  <select name="activity4" id="activity4">
+						<option></option>
 						<option value="egal">Egal</option>
 						<option value="schwimmen">Schwimmen</option>
 						<option value="radfahren">Radfahren</option>
@@ -215,12 +236,13 @@
 				</div>
 			</div>
 			<div class="w3-row">
-				<div class="w3-col m2">
-					<input class="w3-check" type="checkbox">
+				<div class="w3-col m2 w3-padding">
+<!--					<input class="w3-check" type="checkbox">-->
   		   	    	<label>MI</label>
 				</div>
 				<div class="w3-col m3 w3-padding">
 					  <select name="activity5" id="activity5">
+						<option></option>
 						<option value="egal">Egal</option>
 						<option value="schwimmen">Schwimmen</option>
 						<option value="radfahren">Radfahren</option>
@@ -228,8 +250,9 @@
 						<option value="athletik">Athletik</option>
 					  </select>
 				</div>
-				<div class="w3-col m3 w3-padding">
+				<div class="w3-col m3 w3-padding w3-margin-left">
 					  <select name="activity6" id="activity6">
+						<option></option>
 						<option value="egal">Egal</option>
 						<option value="schwimmen">Schwimmen</option>
 						<option value="radfahren">Radfahren</option>
@@ -239,12 +262,13 @@
 				</div>
 			</div>
 			<div class="w3-row">
-				<div class="w3-col m2">
-					<input class="w3-check" type="checkbox">
+				<div class="w3-col m2 w3-padding">
+<!--					<input class="w3-check" type="checkbox">-->
   		   	    	<label>DO</label>
 				</div>
 				<div class="w3-col m3 w3-padding">
 					  <select name="activity7" id="activity7">
+						<option></option>
 						<option value="egal">Egal</option>
 						<option value="schwimmen">Schwimmen</option>
 						<option value="radfahren">Radfahren</option>
@@ -252,8 +276,9 @@
 						<option value="athletik">Athletik</option>
 					  </select>
 				</div>
-				<div class="w3-col m3 w3-padding">
+				<div class="w3-col m3 w3-padding w3-margin-left">
 					  <select name="activity8" id="activity8">
+						<option></option>
 						<option value="egal">Egal</option>
 						<option value="schwimmen">Schwimmen</option>
 						<option value="radfahren">Radfahren</option>
@@ -263,12 +288,13 @@
 				</div>
 			</div>
 			<div class="w3-row">
-				<div class="w3-col m2">
-					<input class="w3-check" type="checkbox">
+				<div class="w3-col m2 w3-padding">
+<!--					<input class="w3-check" type="checkbox">-->
   		   	    	<label>FR</label>
 				</div>
 				<div class="w3-col m3 w3-padding">
 					  <select name="activity9" id="activity9">
+						<option></option>
 						<option value="egal">Egal</option>
 						<option value="schwimmen">Schwimmen</option>
 						<option value="radfahren">Radfahren</option>
@@ -276,8 +302,9 @@
 						<option value="athletik">Athletik</option>
 					  </select>
 				</div>
-				<div class="w3-col m3 w3-padding">
+				<div class="w3-col m3 w3-padding w3-margin-left">
 					  <select name="activity10" id="activity10">
+						<option></option>
 						<option value="egal">Egal</option>
 						<option value="schwimmen">Schwimmen</option>
 						<option value="radfahren">Radfahren</option>
@@ -287,12 +314,13 @@
 				</div>
 			</div>
 			<div class="w3-row">
-				<div class="w3-col m2">
-					<input class="w3-check" type="checkbox">
+				<div class="w3-col m2 w3-padding">
+<!--					<input class="w3-check" type="checkbox">-->
   		   	    	<label>SA</label>
 				</div>
 				<div class="w3-col m3 w3-padding">
 					  <select name="activity11" id="activity11">
+						<option></option>
 						<option value="egal">Egal</option>
 						<option value="schwimmen">Schwimmen</option>
 						<option value="radfahren">Radfahren</option>
@@ -300,8 +328,9 @@
 						<option value="athletik">Athletik</option>
 					  </select>
 				</div>
-				<div class="w3-col m3 w3-padding">
+				<div class="w3-col m3 w3-padding w3-margin-left">
 					  <select name="activity12" id="activity12">
+						<option></option>
 						<option value="egal">Egal</option>
 						<option value="schwimmen">Schwimmen</option>
 						<option value="radfahren">Radfahren</option>
@@ -311,12 +340,13 @@
 				</div>
 			</div>
 			<div class="w3-row">
-				<div class="w3-col m2">
-					<input class="w3-check" type="checkbox">
+				<div class="w3-col m2 w3-padding">
+<!--					<input class="w3-check" type="checkbox">-->
   		   	    	<label>SO</label>
 				</div>
 				<div class="w3-col m3 w3-padding">
 					  <select name="activity13" id="activity13">
+						<option></option>
 						<option value="egal">Egal</option>
 						<option value="schwimmen">Schwimmen</option>
 						<option value="radfahren">Radfahren</option>
@@ -324,8 +354,9 @@
 						<option value="athletik">Athletik</option>
 					  </select>
 				</div>
-				<div class="w3-col m3 w3-padding">
+				<div class="w3-col m3 w3-padding w3-margin-left">
 					  <select name="activity14" id="activity14">
+						<option></option>
 						<option value="egal">Egal</option>
 						<option value="schwimmen">Schwimmen</option>
 						<option value="radfahren">Radfahren</option>
@@ -336,95 +367,1314 @@
 			</div>
 			<br> 
 			<div class="w3-row w3-center">
-				<a onclick="" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Speichern</a> 
+				<a onclick="SaveToDynamodb()" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Speichern</a> 
 			</div>
 		  </div>
 		</div>
 		</div>
 		
-<!--	W3 Modal for Gesundheit-->
+<!--W3 Modal for Gesundheit-->
 		<div id="id03" class="w3-modal">
 		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:600px;">
 		  <header class="w3-container"> 
 			<span onclick="document.getElementById('id03').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-			<h2></h2>
+			<h2>Gesundheit Informationen</h2>
 		  </header>
 		  <div class="w3-container">
-			<p>
-	  			<input class="w3-check" type="checkbox">
-  		   	    <label>Raucher</label>
-  			</p>
 			<div class="w3-row">
-				<div class="w3-third">
+				<div class="w3-third w3-padding">
+					<label>Raucher <span> : </span></label>
+				</div>
+				<div class="w3-half">
+					<input class="w3-input" type="text" id="raucher" >
+				</div>
+			</div>
+			<div class="w3-row">
+				<div class="w3-third w3-padding">
 					<label>körpergröße <span> : </span></label>
 				</div>
 				<div class="w3-half">
-					<input class="w3-input" type="text" required>
+					<input class="w3-input" type="text" id="height" >
 				</div>
 			</div>
 			<div class="w3-row">
-				<div class="w3-third">
+				<div class="w3-third w3-padding">
 					<label>Gewicht <span> : </span></label>
 				</div>
 				<div class="w3-half">
-					<input class="w3-input" type="text" required>
+					<input class="w3-input" type="text" id="weight">
 				</div>
 			</div>
 			<div class="w3-row">
-				<div class="w3-third">
+				<div class="w3-third w3-padding">
 					<label>Beruf <span> : </span></label>
 				</div>
 				<div class="w3-half">
-					<input class="w3-input" type="text" required>
+					<input class="w3-input" type="text" id="job_type">
 				</div>
 			</div>
 			<div class="w3-row">
-				<div class="w3-third">
+				<div class="w3-third w3-padding">
 					<label>Krankheiten, Medikament <span> : </span></label>
 				</div>
 				<div class="w3-half">
-					<input class="w3-input" type="text" required>
+					<input class="w3-input" type="text" id="med_cond">
 				</div>
 			</div>
 			<br> 
 			<div class="w3-row w3-center">
-				<a onclick="" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Speichern</a> 
+				<a onclick="SaveToDynamodb()" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Speichern</a> 
 			</div>
 		  </div>
 		</div>
 		</div>
+		
+<!--W3 Modal for Selecting file for profile picture-->
+		<div id="id04" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:600px;">
+		  <header class="w3-container"> 
+			<span onclick="document.getElementById('id04').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+			<h4>Select a File to Upload</h4>
+		  </header>
+		  <div class="w3-container">
+			<div id ="mainContent">
+     		<form action="#"  method="post" enctype="multipart/form-data" id="uploadForm">
+        		 <div class="row">
+              		<input type="file" size="50" name="file" id="file" onchange="loadFile(event)" />
+			  		<p><img id="output" width="200" /></p>
+        		 </div>
+				
+				 <script>
+					 var loadFile = function(event) {
+					 var image = document.getElementById('output');
+					 image.src = URL.createObjectURL(event.target.files[0]);
+					 console.log(image);
+					 };
+				 </script>
+		 
+				 <div class="row">
+				  	<input type="submit" value="Upload"  id="btn_submit" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00" />
+				 </div>
+       			 <div class="progress">
+            		<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"  id="Upload1" style="width:0%">
+                		<span class="sr-only">20% Complete</span>
+            	 	</div>
+      			 </div>
+    		</form>
+    		</div>
+		</div>
+		</div>
 	</div>
+		
+<!--W3 Modal for personal information-->
+		<div id="id05" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:600px;">
+		  <header class="w3-container"> 
+			<span onclick="document.getElementById('id05').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+			<h2>Personal Details</h2>
+			 <br>
+		  </header>
+		  <div class="w3-container">
+			<div class="w3-row">
+				<div class="w3-third w3-padding">
+					<label>First Name <span> : </span></label>
+				</div>
+				<div class="w3-half">
+					<input class="w3-input" type="text" id="fname">
+				</div>
+			</div>
+			<div class="w3-row">
+				<div class="w3-third w3-padding">
+					<label>Last Name <span> : </span></label>
+				</div>
+				<div class="w3-half">
+					<input class="w3-input" type="text" id="lname">
+				</div>
+			</div>
+			<div class="w3-row">
+				<div class="w3-third w3-padding">
+					<label>Date of Birth <span> : </span></label>
+				</div>
+				<div class="w3-half">
+					<input class="w3-input" type="text" id="dob">
+				</div>
+			</div>
+			<br> 
+			<div class="w3-row w3-center">
+				<a onclick="SaveToDynamodb()" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Speichern</a> 
+			</div>
+		  </div>
+		</div>
+		</div>
+		
+<!--W3 Modal for kontact information-->
+		<div id="id06" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:600px;">
+		  <header class="w3-container"> 
+			<span onclick="document.getElementById('id06').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+			<h2>kontact information</h2>
+		  </header>
+		  <div class="w3-container">
+			<div class="w3-row">
+				<div class="w3-third">
+					<label>Mobile Number <span> : </span></label>
+				</div>
+				<div class="w3-half">
+					<input class="w3-input" type="text" id="mob_nr">
+				</div>
+			</div>
+			<h4>Address</h4>
+			<div class="w3-row">
+				<div class="w3-third">
+					<label>straße <span> : </span></label>
+				</div>
+				<div class="w3-half">
+					<input class="w3-input" type="text" id="str_nr">
+				</div>
+			</div>
+			<div class="w3-row">
+				<div class="w3-third">
+					<label>Stadt <span> : </span></label>
+				</div>
+				<div class="w3-half">
+					<input class="w3-input" type="text" id="stadt">
+				</div>
+			</div>
+			<div class="w3-row">
+				<div class="w3-third">
+					<label>State <span> : </span></label>
+				</div>
+				<div class="w3-half">
+					<input class="w3-input" type="text" id="state">
+				</div>
+			</div>
+			<div class="w3-row">
+				<div class="w3-third">
+					<label>Zip Code <span> : </span></label>
+				</div>
+				<div class="w3-half">
+					<input class="w3-input" type="text" id="zip">
+				</div>
+			</div>
+			<br> 
+			<div class="w3-row w3-center">
+				<a onclick="SaveToDynamodb()" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Speichern</a> 
+			</div>
+		  </div>
+		</div>
+		</div>
+		
+<!--W3 Modal for Bio-->
+		<div id="id07" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-round-large" style="width:100%;max-width:600px;">
+		  <header class="w3-container"> 
+			<span onclick="document.getElementById('id07').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+			<h2> About Yourself</h2>
+			  <br>
+		  </header>
+		  <div class="w3-container">
+		    <textarea class="w3-input w3-border w3-round" style="width:100%" id="bio" rows="5"></textarea>
+			<br> 
+			<div class="w3-row w3-center">
+				<a onclick="SaveToDynamodb()" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Speichern</a> 
+			</div>
+		  </div>
+		</div>
+		</div>
+</div>
+<!-- End center Column -->
 <!-- Right Column -->
 	<div class="w3-quarter">
 		<div class="w3-white w3-card-4">
 			<div class="w3-container">
 				<h4 style="color:#004E9B;">Gesundheit</h4>
 				<p>
-  				   <input class="w3-check" type="checkbox">
-  				   <label>Raucher</label>
+				   <label>Raucher <span> : </span></label>
+  				   <label id="raucher1"></label>
   				</p>
 				<p>
 					<label>körpergröße <span> : </span></label>
-					<label id=""></label>
+					<label id="height1"></label>
 				</p>
 				<p>
 					<label>Gewicht <span> : </span></label>
-					<label id=""></label>
+					<label id="weight1"></label>
 				</p>
 				<p>
 					<label>Beruf <span> : </span></label>
-					<label id=""></label>
+					<label id="job_type1"></label>
 				</p>
 				<p>
 					<label>Krankheiten, Medikament <span> : </span></label>
-					<label id=""></label>
+					<label id="med_cond1"></label>
 				</p>
 				<p><i onclick="document.getElementById('id03').style.display='block'" class="fa fa-edit w3-xlarge w3-right w3-button" style="color:#004E9B;" ></i></p>
 			</div>
-		</div>	
+		</div>
+		<div class="w3-white w3-card-4 w3-margin-top">
+		  <div class="w3-container">
+				<h4 style="color:#004E9B;">Kontact Details</h4>
+			  	<p><i class="fa fa-envelope icon fa-fw w3-margin-right w3-large w3-text-black"></i><label id="email1"></label></p>
+			  	<p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-black"></i><label id="mob_nr1"></label></p>
+          		<p><i class="fa fa-address-card fa-fw w3-margin-right w3-large w3-text-black" aria-hidden="true"></i><label id="str_nr1"></label> <label id="stadt1"></label> <label id="state1"></label> <label id="zip1"></label> </p>
+			  	<p><i onclick="document.getElementById('id06').style.display='block'" class="fa fa-edit w3-xlarge w3-right w3-button" style="color:#004E9B;" ></i></p>
+		  </div>
+	  </div>
 	</div>
+<!-- End Right Column -->
 </div>
-</div>
-	
+</div>	
 </body>
+	
+<script>
+//***************Initial Configuration required for user Sign-in process***************	
+
+var data = { 
+	UserPoolId : _config.cognito.userPoolId,
+    ClientId : _config.cognito.clientId
+    };
+var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+var cognitoUser = userPool.getCurrentUser();
+var uuid = cognitoUser.getUsername();
+var albumBucketName = "mygoal-profile-pics";
+var IdentityPoolId = "eu-central-1:7f774341-ef05-4fa5-894c-643df4f849fe";
+	
+AWS.config.update({
+	region: "eu-central-1",
+  	accessKeyId: "AKIA4YTB7HBJQ3HIQGM7",
+  	secretAccessKey: "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",
+	});
+		
+$("#btn_submit").click(function(event) {
+    event.preventDefault();
+    var bucket = new AWS.S3({params: {Bucket: 'mygoal-images-1'}});
+ 	var sub1 = uuid;
+    var fileChooser = document.getElementById('file');
+    var file = fileChooser.files[0];
+	var fileName = file.name;
+	//var albumPhotosKey = encodeURIComponent(sub1) + "/";
+	//var photoKey = albumPhotosKey + fileName;
+	
+    if (file) {
+ 
+    var params = {Key:sub1 + '.jpg', ContentType: file.type, Body: file, ACL: "public-read"};
+	//console.log ('Itna Hua')
+ 
+    bucket.upload(params).on('httpUploadProgress', function(evt) {
+            console.log("Uploaded :: " + parseInt((evt.loaded * 100) / evt.total)+'%');
+            var per=parseInt((evt.loaded * 100) / evt.total)+'%';
+            document.getElementById("Upload1").style.width=per ;
+     
+        }).send(function(err, data) {
+         
+            if(!err) {
+               alert("File uploaded Successfully");
+            }                              
+            });
+    }
+	var params1 = {
+	ExpressionAttributeNames: {
+   		"#AT": "s3key"
+  	},
+	ExpressionAttributeValues: {
+   		":t": {
+     	S: 'https://mygoal-images-1-resized.s3.eu-central-1.amazonaws.com/' + 'resized_' + sub1 + '.jpg'
+    	}
+	},
+	Key: {
+   		"sub": {S: uuid},
+		"class": {S: 'profile'}
+		},
+	ReturnValues: "ALL_NEW",		
+	TableName: 'MyGoal',
+  	UpdateExpression: "SET #AT= :t"
+	};
+	
+	ddb.updateItem(params1, function(err, data) {
+  	if (err) {
+    	console.log("Error", err);
+	} else {
+    	console.log("Success", data);
+  	}	
+	});
+        return false;
+    });	
+	
+//AWS.config.update({region: 'eu-central-1'});	
+var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
+		
+//********************Writing Data into DynamoDb This code also works fine for updating attributes individually***************/	
+function SaveToDynamodb(){
+	if (document.getElementById("fname").value){
+		var params3 = {
+		ExpressionAttributeNames: {
+			"#B": "info",
+			"#C": "first_name"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("fname").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+
+		ddb.updateItem(params3, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});	
+	}
+	
+	if (document.getElementById("lname").value){	
+		var params4 = {
+		ExpressionAttributeNames: {
+			"#B": "info",
+			"#C": "last_name"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("lname").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params4, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+
+	if (document.getElementById("dob").value){	
+		var params5 = {
+		ExpressionAttributeNames: {
+			"#B": "info",
+			"#C": "dob"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("dob").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params5, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+		
+	if (document.getElementById("bio").value){	
+		var params6 = {
+		ExpressionAttributeNames: {
+			"#B": "bio",
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("bio").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B= :b",
+		};
+	
+		ddb.updateItem(params6, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+		
+	if (document.getElementById("raucher").value){	
+		var params7 = {
+		ExpressionAttributeNames: {
+			"#B": "gesundheit",
+			"#C": "raucher"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("raucher").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params7, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+		
+	if (document.getElementById("height").value){	
+		var params8 = {
+		ExpressionAttributeNames: {
+			"#B": "gesundheit",
+			"#C": "height"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("height").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params8, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+		
+	if (document.getElementById("weight").value){	
+		var params9 = {
+		ExpressionAttributeNames: {
+			"#B": "gesundheit",
+			"#C": "weight"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("weight").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params9, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+		
+	if (document.getElementById("job_type").value){	
+		var params10 = {
+		ExpressionAttributeNames: {
+			"#B": "gesundheit",
+			"#C": "job_type"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("job_type").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params10, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+		
+	if (document.getElementById("med_cond").value){	
+		var params11 = {
+		ExpressionAttributeNames: {
+			"#B": "gesundheit",
+			"#C": "med_cond"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("med_cond").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params11, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("activity1").value){	
+		var params12 = {
+		ExpressionAttributeNames: {
+			"#B": "training_pref",
+			"#C": "activity1"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("activity1").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params12, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("activity2").value){	
+		var params13 = {
+		ExpressionAttributeNames: {
+			"#B": "training_pref",
+			"#C": "activity2"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("activity2").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params13, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("activity3").value){	
+		var params14 = {
+		ExpressionAttributeNames: {
+			"#B": "training_pref",
+			"#C": "activity3"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("activity3").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params14, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("activity4").value){	
+		var params15 = {
+		ExpressionAttributeNames: {
+			"#B": "training_pref",
+			"#C": "activity4"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("activity4").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params15, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("activity5").value){	
+		var params16 = {
+		ExpressionAttributeNames: {
+			"#B": "training_pref",
+			"#C": "activity5"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("activity5").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params16, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("activity6").value){	
+		var params17 = {
+		ExpressionAttributeNames: {
+			"#B": "training_pref",
+			"#C": "activity6"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("activity6").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params17, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("activity7").value){	
+		var params18 = {
+		ExpressionAttributeNames: {
+			"#B": "training_pref",
+			"#C": "activity7"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("activity7").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params18, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("activity8").value){	
+		var params19 = {
+		ExpressionAttributeNames: {
+			"#B": "training_pref",
+			"#C": "activity8"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("activity8").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params19, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("activity9").value){	
+		var params20 = {
+		ExpressionAttributeNames: {
+			"#B": "training_pref",
+			"#C": "activity9"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("activity9").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params20, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("activity10").value){	
+		var params21 = {
+		ExpressionAttributeNames: {
+			"#B": "training_pref",
+			"#C": "activity10"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("activity10").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params21, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("activity11").value){	
+		var params22 = {
+		ExpressionAttributeNames: {
+			"#B": "training_pref",
+			"#C": "activity11"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("activity11").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params22, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("activity12").value){	
+		var params23 = {
+		ExpressionAttributeNames: {
+			"#B": "training_pref",
+			"#C": "activity12"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("activity12").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params23, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("activity13").value){	
+		var params24 = {
+		ExpressionAttributeNames: {
+			"#B": "training_pref",
+			"#C": "activity13"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("activity13").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params24, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("activity14").value){	
+		var params25 = {
+		ExpressionAttributeNames: {
+			"#B": "training_pref",
+			"#C": "activity14"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("activity14").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params25, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("prowoche").value){	
+		var params26 = {
+		ExpressionAttributeNames: {
+			"#B": "training_pref",
+			"#C": "prowoche"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("prowoche").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params26, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("mob_nr").value){	
+		var params27 = {
+		ExpressionAttributeNames: {
+			"#B": "info",
+			"#C": "mob_nr"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("mob_nr").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params27, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("str_nr").value){	
+		var params28 = {
+		ExpressionAttributeNames: {
+			"#B": "address",
+			"#C": "str_nr"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("str_nr").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params28, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("stadt").value){	
+		var params29 = {
+		ExpressionAttributeNames: {
+			"#B": "address",
+			"#C": "stadt"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("stadt").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params29, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("state").value){	
+		var params30 = {
+		ExpressionAttributeNames: {
+			"#B": "address",
+			"#C": "state"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("state").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params30, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	
+	if (document.getElementById("zip").value){	
+		var params31 = {
+		ExpressionAttributeNames: {
+			"#B": "address",
+			"#C": "zip"
+		},
+		ExpressionAttributeValues: {
+			":b": {S: document.getElementById("zip").value}
+		},
+		Key: {
+			"sub": {S: uuid},
+			"class": {S: 'profile'}
+			},
+
+		TableName: 'MyGoal',
+		UpdateExpression: "SET  #B.#C= :b",
+		};
+	
+		ddb.updateItem(params31, function(err, data) {
+		if (err) {
+			console.log("Error", err);
+		} else {
+			console.log("Success", data);
+			location.reload();
+		}	
+		});
+	}
+	}
+//*********************Working code for signing into the application*************************		
+window.onload = function(){
+    if (cognitoUser != null) {
+        cognitoUser.getSession(function(err, session) {
+            if (err) {
+                alert(err);
+                return;
+            }
+            console.log('session validity: ' + session.isValid());
+			var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
+			var params0 = {
+				TableName: "MyGoal",
+				Key: {
+					"sub": {S:uuid},
+					"class": {S:'profile'}
+					},
+		 		};
+		 		ddb.getItem(params0, function(err, data) {
+		   			if (err) console.log(err, err.stack); // an error occurred
+		   			else     console.log(data);           // successful response
+							 document.getElementById("fname1").innerHTML = data.Item.info.M.first_name.S;
+							 document.getElementById("lname1").innerHTML = data.Item.info.M.last_name.S;
+							 document.getElementById("email1").innerHTML = data.Item.info.M.email.S;
+							 if (data.Item.info.M.dob.S){
+								document.getElementById("dob1").innerHTML = data.Item.info.M.dob.S;
+								 }
+							 if (data.Item.info.M.mob_nr.S){
+								document.getElementById("mob_nr1").innerHTML = data.Item.info.M.mob_nr.S;
+								 }
+							 if (data.Item.bio.S){
+								document.getElementById("bio1").innerHTML = data.Item.bio.S;
+								 }
+							 if (data.Item.s3key){
+							 	document.getElementById("pic").src = data.Item.s3key.S;
+								console.log(data.Item.s3key.S);
+								 }
+							 if (data.Item.training_pref.M.prowoche.S){
+								document.getElementById("prowoche1").innerHTML = data.Item.training_pref.M.prowoche.S;
+								 }
+							 if (data.Item.training_pref.M.activity1.S){
+								document.getElementById("activity1_1").innerHTML = data.Item.training_pref.M.activity1.S;
+								 }
+							 if (data.Item.training_pref.M.activity2.S){
+								document.getElementById("activity2_1").innerHTML = data.Item.training_pref.M.activity2.S;
+								 }
+							 if (data.Item.training_pref.M.activity3.S){
+								document.getElementById("activity3_1").innerHTML = data.Item.training_pref.M.activity3.S;
+								 }
+							 if (data.Item.training_pref.M.activity4.S){
+								document.getElementById("activity4_1").innerHTML = data.Item.training_pref.M.activity4.S;
+								 }
+							 if (data.Item.training_pref.M.activity5.S){
+								document.getElementById("activity5_1").innerHTML = data.Item.training_pref.M.activity5.S;
+								 }
+							 if (data.Item.training_pref.M.activity6.S){
+								document.getElementById("activity6_1").innerHTML = data.Item.training_pref.M.activity6.S;
+								 }
+							 if (data.Item.training_pref.M.activity7.S){
+								document.getElementById("activity7_1").innerHTML = data.Item.training_pref.M.activity7.S;
+								 }
+							 if (data.Item.training_pref.M.activity8.S){
+								document.getElementById("activity8_1").innerHTML = data.Item.training_pref.M.activity8.S;
+								 }
+							 if (data.Item.training_pref.M.activity9.S){
+								document.getElementById("activity9_1").innerHTML = data.Item.training_pref.M.activity9.S;
+								 }
+							 if (data.Item.training_pref.M.activity10.S){
+								document.getElementById("activity10_1").innerHTML = data.Item.training_pref.M.activity10.S;
+								 }
+							 if (data.Item.training_pref.M.activity11.S){
+								document.getElementById("activity11_1").innerHTML = data.Item.training_pref.M.activity11.S;
+								 }
+							 if (data.Item.training_pref.M.activity12.S){
+								document.getElementById("activity12_1").innerHTML = data.Item.training_pref.M.activity12.S;
+								 }
+							 if (data.Item.training_pref.M.activity13.S){
+								document.getElementById("activity13_1").innerHTML = data.Item.training_pref.M.activity13.S;
+								 }
+							 if (data.Item.training_pref.M.activity14.S){
+								document.getElementById("activity14_1").innerHTML = data.Item.training_pref.M.activity14.S;
+								 }
+							 if (data.Item.gesundheit.M.raucher.S){
+								document.getElementById("raucher1").innerHTML = data.Item.gesundheit.M.raucher.S;
+								 }
+							 if (data.Item.gesundheit.M.height.S){
+								document.getElementById("height1").innerHTML = data.Item.gesundheit.M.height.S;
+								 }
+							 if (data.Item.gesundheit.M.weight.S){
+								document.getElementById("weight1").innerHTML = data.Item.gesundheit.M.weight.S;
+								 }
+							 if (data.Item.gesundheit.M.job_type.S){
+								document.getElementById("job_type1").innerHTML = data.Item.gesundheit.M.job_type.S;
+								 }
+							 if (data.Item.gesundheit.M.med_cond.S){
+								document.getElementById("med_cond1").innerHTML = data.Item.gesundheit.M.med_cond.S;
+								 }	 
+							 if (data.Item.address.M.str_nr.S){
+								document.getElementById("str_nr1").innerHTML = data.Item.address.M.str_nr.S;
+								 }
+							 if (data.Item.address.M.stadt.S){
+								document.getElementById("stadt1").innerHTML = data.Item.address.M.stadt.S;
+								 }
+							 if (data.Item.address.M.state.S){
+								document.getElementById("state1").innerHTML = data.Item.address.M.state.S;
+								 }
+							 if (data.Item.address.M.zip.S){
+								document.getElementById("zip1").innerHTML = data.Item.address.M.zip.S;
+								 }
+				}
+		 		);
+			});
+		}	
+		
+	}
+		
+//*********************Signing Out*************************
+function signOut(){
+	if (cognitoUser != null) {
+			cognitoUser.signOut();
+			window.open("/Users/shubhampachade/Documents/Website/Forgot Password_v1.6/sign_out.html");
+        }
+	}
+		
+function chngpass(){
+var password= document.getElementById("oldpass").value;
+var newpassword= document.getElementById("newpass").value;
+var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
+    Username: document.getElementById("sub").innerHTML,
+    Password: password,
+	});
+	
+var poolData = {
+    UserPoolId : _config.cognito.userPoolId, // Your user pool id here
+    ClientId : _config.cognito.clientId, // Your client id here
+    };
+	
+var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+var userData = {
+    Username: document.getElementById("sub").innerHTML,
+    Pool: userPool
+        };
+var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+cognitoUser.authenticateUser(authenticationDetails, {
+	 onSuccess: function (result) {
+		 cognitoUser.changePassword(password, newpassword, (err, result) => {
+			 if (err) {
+				 console.log(err);
+           	 }
+			 else {
+                 console.log("Successfully changed password of the user.");
+                 console.log(result);
+             }
+         });
+     },
+   	onFailure: function (err) {
+    console.log(err);
+    },
+});
+}		
+</script>
 </html>
