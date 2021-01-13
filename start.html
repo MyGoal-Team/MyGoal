@@ -12,6 +12,8 @@
 <script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.16.min.js"></script> 
 <script src="js/amazon-cognito-identity.min.js"></script>   
 <script src="js/config.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
 
 <title>Start</title>
 <style>
@@ -20,6 +22,7 @@
 	}
 </style>
 <script>
+
  function signInButton() {
 	var authenticationData = {
         Username : document.getElementById("inputUsername").value,
@@ -48,6 +51,7 @@
         },
     });
   }
+//For forget password of the existing user
  function forgotpasswordbutton(){
 	var poolData = {
         UserPoolId : _config.cognito.userPoolId, // Your user pool id here
@@ -62,36 +66,48 @@
         Pool : userPool,
     };
     var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-		
-    cognitoUser.forgotPassword({
-        onSuccess: function (result) {
-            console.log('call result: ' + result);
-			modal1.style.display = "block";
-        },
-        onFailure: function(err) {
-            alert(err);
-			console.log(err);
-        },
-        });
-  }
+	 
+	cognitoUser.forgotPassword({
+    onSuccess: function (result) {
+        console.log('call result: ' + result);
+		modal1.style.display = "block";
+    },
+    onFailure: function(err) {
+        alert(err);
+    },
+//    inputVerificationCode() {
+//        var verificationCode = document.getElementById("code").value;
+//    	var newPassword = document.getElementById("newpassword").value
+//        cognitoUser.confirmPassword(verificationCode, newPassword, this);
+//    }
+});	
+}
  function inputVerificationCode() {
 	var poolData = {
         UserPoolId : _config.cognito.userPoolId, // Your user pool id here
         ClientId : _config.cognito.clientId, // Your client id here
     };
-	
     var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-	
+	var modal = document.getElementById("id07");
     var userData = {
         Username : document.getElementById("email").value,
         Pool : userPool,
     };
-	
     var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
     var verificationCode = document.getElementById("code").value;
     var newPassword = document.getElementById("newpassword").value
-    cognitoUser.confirmPassword(verificationCode, newPassword, this);
-    }
+    cognitoUser.confirmPassword(verificationCode, newPassword, {
+            onSuccess() {
+                console.log('Password confirmed!');
+				modal.style.display = "none";
+            },
+            onFailure(err) {
+                console.log('Password not confirmed!');
+				alert(err);
+            }
+        });
+ }	 
+// For signing up new user
  function registerButton() {
 		var modal = document.getElementById("id02");
 		givenname =  document.getElementById("givennameRegister").value;
@@ -154,14 +170,11 @@
     	UserPoolId : _config.cognito.userPoolId, // Your user pool id here
     	ClientId : _config.cognito.clientId, // Your client id here
     };
-	
     var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-	
     var userData = {
         Username : document.getElementById("emailInputRegister").value,
         Pool : userPool,
     };
-	
     var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
 	var code = document.getElementById("OTP").value;
 	cognitoUser.confirmRegistration(code, true, function(err, result) {
@@ -169,21 +182,82 @@
         console.log(err);
         return;
     }
-
     console.log('call result: ' + result);
 	if (result == 'SUCCESS') {
 		modal.style.display = "block";
         return;
     }	
-		
 });
 }
+//For contact us Form
+ function submitToAPI(e) {
+       e.preventDefault();
+       var URL = "https://gq1edmd7d9.execute-api.eu-central-1.amazonaws.com/dev/contactus";
+
+            var Namere = /[A-Za-z]{1}[A-Za-z]/;
+            if (!Namere.test($("#name-input").val())) {
+                         alert ("Name can not less than 2 char");
+                return;
+            }
+            var mobilere = /[0-9]{10}/;
+            if (!mobilere.test($("#phone-input").val())) {
+                alert ("Please enter valid mobile number");
+                return;
+            }
+            if ($("#email-input").val()=="") {
+                alert ("Please enter your email id");
+                return;
+            }
+
+            var reeamil = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,6})?$/;
+            if (!reeamil.test($("#email-input").val())) {
+                alert ("Please enter valid email address");
+                return;
+            }
+
+       var name = $("#name-input").val();
+       var phone = $("#phone-input").val();
+       var email = $("#email-input").val();
+       var desc = $("#description-input").val();
+       var data = {
+          name : name,
+          phone : phone,
+          email : email,
+          desc : desc
+        };
+
+       $.ajax({
+         type: "POST",
+         url : "https://gq1edmd7d9.execute-api.eu-central-1.amazonaws.com/dev/contactus",
+         dataType: "json",
+         cors: "true",
+         contentType: "application/json; charset=utf-8",
+         data: JSON.stringify(data),
+
+         
+         success: function () {
+           // clear form and show a success message
+		   document.getElementById('id04').style.display='none';
+		   document.getElementById('id05').style.display='block';
+           //alert("Successfull");
+           document.getElementById("contact-form").reset();
+		   document.getElementById('id05').style.display='block';
+		   location.reload();
+         },
+         error: function () {
+           // show an error message
+           alert("UnSuccessfull");
+         }});
+     }
  function loadPage(){
      window.location="profile.html";
 	}
-function loadPage1(){
-     window.location="start.html";
+	
+ function loadPage1(){
+	 location.reload();
+     document.getElementById('id01').style.display='block';
 	}
+	
 </script>	
 </head>
 
@@ -323,7 +397,7 @@ function loadPage1(){
 			<p>Ab jetzt kannst du dich mit deiner E-mail Address und deinem Passwort jederzeit einloggen </p>
 		  </div>
 		  <div class="w3-row w3-center">
-				<a onclick="loadpage1()" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">To Homepage</a> 
+		  <a onclick="document.getElementById('id03').style.display='none',document.getElementById('id01').style.display='block'" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Login</a> 
 	   	  </div>
 		</div>
 		</div>
@@ -337,20 +411,20 @@ function loadPage1(){
 		  <div class="w3-container">
 <!--			<div class="w3-row-padding w3-mobile">-->
   			<div class="w3-half">   
-    			<label>Vorname</label>
-   				<input class="w3-input w3-border w3-round" style="width:98%" type="text" required>
+    			<label>Name</label>
+   				<input class="w3-input w3-border w3-round" id="name-input" style="width:98%" type="text" required>
 			</div>
 			<div class="w3-half">  
-				<label>Nachname</label>
-    			<input class="w3-input w3-border w3-round" style="width:99%" type="text"  required>
+				<label>Phone</label>
+    			<input class="w3-input w3-border w3-round" id="phone-input" style="width:99%" type="text"  required>
 			</div>
 <!--			</div>-->
 			<label>E-mail</label>
-			<input class="w3-input w3-border w3-round w3-margin-bottom" type="text" required>
+			<input class="w3-input w3-border w3-round w3-margin-bottom" id="email-input" type="text" required>
 			<label>Nachricht</label>
-			<textarea class="w3-input w3-border w3-round" style="width:100%" name="Text1" rows="5"></textarea>
+			<textarea class="w3-input w3-border w3-round" id="description-input" style="width:100%" name="Text1" rows="5"></textarea>
 			<div class="w3-row w3-center">
-				<a onclick="document.getElementById('id05').style.display='block'" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Senden</a> 
+				<a onclick="submitToAPI(event)" class="w3-button w3-round-xlarge w3-margin-bottom" style="color:#004E9B;background-color:#FFDF00">Senden</a> 
 			</div>
 		  </div>
 		</div>

@@ -1635,10 +1635,14 @@ window.onload = function(){
 function signOut(){
 	if (cognitoUser != null) {
 			cognitoUser.signOut();
-			window.open("/Users/shubhampachade/Documents/Website/Forgot Password_v1.6/sign_out.html");
+			loadPage();
         }
 	}
-		
+	
+function loadPage(){
+     window.location="start.html";
+	}	
+	
 function chngpass(){
 var password= document.getElementById("oldpass").value;
 var newpassword= document.getElementById("newpass").value;
@@ -1676,5 +1680,6 @@ cognitoUser.authenticateUser(authenticationDetails, {
     },
 });
 }		
+
 </script>
 </html>
